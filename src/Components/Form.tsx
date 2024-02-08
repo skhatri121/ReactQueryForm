@@ -1,19 +1,22 @@
 import { Box, Button, Input } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
+
+type FormProps = {
+  onSubmit: SubmitHandler<FormField>;
+};
+
 type FormField = {
   title: string;
   description: string;
   price: string;
 };
-const Form = () => {
+const Form: React.FC<FormProps> = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormField>();
-  const onSubmit: SubmitHandler<FormField> = (data) => {
-    console.log(data);
-  };
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

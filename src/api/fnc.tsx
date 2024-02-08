@@ -4,8 +4,18 @@ export async function fetchProducts() {
 }
 
 export async function fetchProduct(id) {
-  const response = await fetch(`http://localhost:3000/products/${id}`);
-  return response.json();
+  try {
+    const response = await fetch(`http://localhost:3000/products/${id}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching product:", error.message);
+    throw error;
+  }
 }
 
 export async function createProduct(newProduct) {
@@ -15,6 +25,27 @@ export async function createProduct(newProduct) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newProduct),
+  });
+  return response.json();
+}
+
+export async function updateProduct(updatedProduct) {
+  const response = await fetch(
+    `http://localhost:3000/products/${updatedProduct.id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedProduct),
+    }
+  );
+  return response.json();
+}
+
+export async function deleteProduct(id) {
+  const response = await fetch(`http://localhost:3000/products/${id}`, {
+    method: "DELETE",
   });
   return response.json();
 }

@@ -9,7 +9,7 @@ const Product = () => {
   const {
     isLoading,
     isError,
-    data: products,
+    data: product,
     error,
   } = useQuery({
     queryKey: ["products", id],
@@ -21,8 +21,8 @@ const Product = () => {
 
   return (
     <>
-      <Heading>{products.title}</Heading>
-      <Text>{products.description}</Text>
+      <Heading>{product.title}</Heading>
+      <Text>{product.description}</Text>
       <Button onClick={() => navigate("/")}>Back to product list</Button>
     </>
   );

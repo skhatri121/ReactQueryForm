@@ -1,16 +1,28 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Product One",
       "description": "Product description",
       "price": 2000
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Product Two",
       "description": "Second Product description",
       "price": 1555
+    },
+    {
+      "id": "2612f93f-2c97-4934-a251-923ebf1817a9",
+      "title": "success",
+      "description": "desc",
+      "price": "200"
+    },
+    {
+      "id": "e61481bb-aa3c-4ecb-9dc3-c6ed96802431",
+      "title": "Check",
+      "description": "checking",
+      "price": "10"
     }
   ]
 }

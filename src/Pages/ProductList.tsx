@@ -9,11 +9,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import AddProduct from "../Components/AddProduct";
-import { useQuery } from "react-query";
-import { fetchProducts } from "../api/fnc";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { fetchProducts, deleteProduct } from "../api/fnc";
 import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const {
     isLoading,
@@ -24,6 +25,17 @@ const ProductList = () => {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
+
+  const deleteProductMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+
+  const handleDelete = (id) => {
+    deleteProductMutation.mutate(id);
+  };
 
   if (isLoading) return "Loading...";
   if (isError) return `Error:${error.message}`;
@@ -50,8 +62,12 @@ const ProductList = () => {
                 <Text pt="2" fontSize="sm">
                   $ {product.price}
                 </Text>
-                <Button>Edit</Button>
-                <Button>Delete</Button>
+                <Button
+                  onClick={() => navigate(`/products/${product.id}/edit`)}
+                >
+                  Edit
+                </Button>
+                <Button onClick={() => handleDelete(product.id)}>Delete</Button>
               </Box>
             ))}
           </Stack>

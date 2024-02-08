@@ -8,7 +8,7 @@ const AddProduct = () => {
   const createProductMutation = useMutation({
     mutationFn: createProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
       console.log("success bro!");
     },
   });
@@ -21,7 +21,9 @@ const AddProduct = () => {
 
   return (
     <>
-      <Form onSubmit={handleAddProduct} initialValue={{}} />
+      <form onSubmit={handleAddProduct} initialValue={{}}>
+        <Form />
+      </form>
     </>
   );
 };

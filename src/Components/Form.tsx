@@ -1,8 +1,10 @@
 import { Box, Button, Input } from "@chakra-ui/react";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormProps = {
   onSubmit: SubmitHandler<FormField>;
+  initialValue: FormField;
 };
 
 type FormField = {
@@ -10,12 +12,21 @@ type FormField = {
   description: string;
   price: string;
 };
-const Form: React.FC<FormProps> = ({ onSubmit }) => {
+const Form: React.FC<FormProps> = ({ onSubmit, initialValue }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormField>();
+
+  React.useEffect(() => {
+    if (initialValue) {
+      setValue("title", initialValue.title || "");
+      setValue("description", initialValue.description || "");
+      setValue("price", initialValue.price || "");
+    }
+  }, [initialValue, setValue]);
 
   return (
     <>
@@ -27,6 +38,7 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
             placeholder="Product Title"
           />
           {errors.title && <Box color="red">{errors.title.message}</Box>}
+
           <Input
             mt="5px"
             {...register("description", {

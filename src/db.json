@@ -4,7 +4,7 @@
       "id": "1",
       "title": "Product One",
       "description": "Product description",
-      "price": 2000
+      "price": "20"
     },
     {
       "id": "2",
@@ -22,7 +22,7 @@
       "id": "e61481bb-aa3c-4ecb-9dc3-c6ed96802431",
       "title": "Check",
       "description": "checking",
-      "price": "10"
+      "price": "1000"
     }
   ]
 }

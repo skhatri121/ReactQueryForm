@@ -1,8 +1,8 @@
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchProduct, updateProduct } from "../api/fnc";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import Form from "./Form";
-import { SubmitHandler } from "react-hook-form";
+import Form from "./Form"; // Import the Form component
 
 const EditProduct = () => {
   const queryClient = useQueryClient();
@@ -28,17 +28,20 @@ const EditProduct = () => {
   });
 
   if (isLoading) return "Loading...";
-  if (isError) return `Error:${error.message}`;
+  if (isError) return `Error: ${error.message}`;
 
-  const handleUpdateProduct: SubmitHandler<FormField> = (updatedProduct) => {
+  const handleUpdateProduct = (updatedProduct) => {
     updateProductMutation.mutate({
       id,
       ...updatedProduct,
     });
   };
+
   return (
     <>
+      <Heading>Edit Product</Heading>
       <Form onSubmit={handleUpdateProduct} initialValue={product} />
+      {/* Render other product details if needed */}
     </>
   );
 };

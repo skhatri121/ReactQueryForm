@@ -1,8 +1,8 @@
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchProduct, updateProduct } from "../api/fnc";
-import Form from "./Form"; // Import the Form component
+import Form from "./Form";
 
 const EditProduct = () => {
   const queryClient = useQueryClient();
@@ -41,7 +41,6 @@ const EditProduct = () => {
     <>
       <Heading>Edit Product</Heading>
       <Form onSubmit={handleUpdateProduct} initialValue={product} />
-      {/* Render other product details if needed */}
     </>
   );
 };

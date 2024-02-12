@@ -23,6 +23,7 @@ const Product = () => {
     <>
       <Heading>{product.title}</Heading>
       <Text>{product.description}</Text>
+      <Text>{product.price}</Text>
       <Button onClick={() => navigate("/")}>Back to product list</Button>
     </>
   );

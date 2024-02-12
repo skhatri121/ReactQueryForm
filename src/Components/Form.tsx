@@ -1,6 +1,8 @@
-import { Box, Button, Input } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import CommonInput from "./CommonInput";
+import CommonButton from "./CommonButton";
 
 type FormProps = {
   onSubmit: SubmitHandler<FormField>;
@@ -12,6 +14,7 @@ type FormField = {
   description: string;
   price: string;
 };
+
 const Form: React.FC<FormProps> = ({ onSubmit, initialValue }) => {
   const {
     register,
@@ -29,42 +32,32 @@ const Form: React.FC<FormProps> = ({ onSubmit, initialValue }) => {
   }, [initialValue, setValue]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box p="10px 20px">
-          <Input
-            {...register("title", { required: "Title is required" })}
-            type="text"
-            placeholder="Product Title"
-          />
-          {errors.title && <Box color="red">{errors.title.message}</Box>}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box p="10px 20px">
+        <CommonInput
+          register={register}
+          name="title"
+          placeholder="Product Title"
+          errorMessage={errors.title?.message}
+        />
 
-          <Input
-            mt="5px"
-            {...register("description", {
-              required: "Description is required",
-            })}
-            type="text"
-            placeholder="Product Description"
-          />
-          {errors.description && (
-            <Box color="red">{errors.description.message}</Box>
-          )}
+        <CommonInput
+          register={register}
+          name="description"
+          placeholder="Product Description"
+          errorMessage={errors.description?.message}
+        />
 
-          <Input
-            mt="5px"
-            {...register("price", { required: "Price is required" })}
-            type="text"
-            placeholder="Product Price"
-          />
-          {errors.price && <Box color="red">{errors.price.message}</Box>}
+        <CommonInput
+          register={register}
+          name="price"
+          placeholder="Product Price"
+          errorMessage={errors.price?.message}
+        />
 
-          <Button type="submit" mt="5px">
-            Submit
-          </Button>
-        </Box>
-      </form>
-    </>
+        <CommonButton label="Submit" />
+      </Box>
+    </form>
   );
 };
 

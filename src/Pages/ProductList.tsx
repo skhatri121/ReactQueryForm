@@ -1,21 +1,27 @@
+import { useState } from "react";
 import {
-  Box,
   Button,
-  Card,
-  CardBody,
-  Heading,
-  Stack,
-  StackDivider,
-  Text,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
 import AddProduct from "../Components/AddProduct";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { fetchProducts, deleteProduct } from "../api/fnc";
 import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 const ProductList = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [selectedProductIds, setSelectedProductIds] = useState([]);
+  const productsPerPage = 5;
+
   const {
     isLoading,
     isError,
@@ -30,49 +36,114 @@ const ProductList = () => {
     mutationFn: deleteProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
+      setSelectedProductIds([]);
     },
   });
 
-  const handleDelete = (id) => {
-    deleteProductMutation.mutate(id);
+  const handleDelete = () => {
+    selectedProductIds.forEach((id) => {
+      deleteProductMutation.mutate(id);
+    });
+  };
+
+  const handleCheckboxChange = (productId) => {
+    setSelectedProductIds((prevSelectedProductIds) => {
+      if (prevSelectedProductIds.includes(productId)) {
+        return prevSelectedProductIds.filter((id) => id !== productId);
+      } else {
+        return [...prevSelectedProductIds, productId];
+      }
+    });
   };
 
   if (isLoading) return "Loading...";
-  if (isError) return `Error:${error.message}`;
+  if (isError) return `Error: ${error.message}`;
+
+  if (!products || products.length === 0) {
+    return <div>No products found.</div>;
+  }
+
+  const pageCount = Math.ceil(products.length / productsPerPage);
+
+  const changePage = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const offset = currentPage * productsPerPage;
 
   return (
     <>
       <AddProduct />
-      <Card>
-        <CardBody>
-          <Stack divider={<StackDivider />} spacing="4">
-            {products.map((product) => (
-              <Box key={product.id}>
-                <Box
+
+      <TableContainer>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th></Th>
+              <Th>Product Title</Th>
+              <Th>Description</Th>
+              <Th isNumeric>Price</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {products.slice(offset, offset + productsPerPage).map((product) => (
+              <Tr key={product.id}>
+                <Td>
+                  <input
+                    type="checkbox"
+                    checked={selectedProductIds.includes(product.id)}
+                    onChange={() => handleCheckboxChange(product.id)}
+                  />
+                </Td>
+                <Td
                   cursor="pointer"
                   onClick={() => navigate(`/products/${product.id}`)}
                 >
-                  <Heading size="xs" textTransform="uppercase">
-                    {product.title}
-                  </Heading>
-                  <Text pt="2" fontSize="sm">
-                    {product.description}
-                  </Text>
-                </Box>
-                <Text pt="2" fontSize="sm">
-                  $ {product.price}
-                </Text>
-                <Button
-                  onClick={() => navigate(`/products/${product.id}/edit`)}
+                  {product.title}
+                </Td>
+                <Td
+                  cursor="pointer"
+                  onClick={() => navigate(`/products/${product.id}`)}
                 >
-                  Edit
-                </Button>
-                <Button onClick={() => handleDelete(product.id)}>Delete</Button>
-              </Box>
+                  {product.description}
+                </Td>
+                <Td
+                  isNumeric
+                  cursor="pointer"
+                  onClick={() => navigate(`/products/${product.id}`)}
+                >
+                  {product.price}
+                </Td>
+                <Td>
+                  <Button
+                    onClick={() => navigate(`/products/${product.id}/edit`)}
+                    mt="2"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    disabled={selectedProductIds.length === 0}
+                    onClick={handleDelete}
+                    mt="5px"
+                  >
+                    Delete
+                  </Button>
+                </Td>
+              </Tr>
             ))}
-          </Stack>
-        </CardBody>
-      </Card>
+          </Tbody>
+        </Table>
+        <ReactPaginate
+          breakLabel={"..."}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={changePage}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+        />
+      </TableContainer>
     </>
   );
 };

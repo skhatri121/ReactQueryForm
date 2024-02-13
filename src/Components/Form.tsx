@@ -1,8 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CommonInput from "./CommonInput";
-import CommonButton from "./CommonButton";
 
 type FormProps = {
   onSubmit: SubmitHandler<FormField>;
@@ -55,7 +54,14 @@ const Form: React.FC<FormProps> = ({ onSubmit, initialValue }) => {
           errorMessage={errors.price?.message}
         />
 
-        <CommonButton label="Submit" />
+        <Button
+          type="submit"
+          variant="variant.2"
+          bg="primary.60"
+          color="primary.59"
+        >
+          Submit
+        </Button>
       </Box>
     </form>
   );

@@ -17,6 +17,12 @@
       "title": "product eleven",
       "description": "elventh desc",
       "price": "9879"
+    },
+    {
+      "id": "254d5246-281e-484c-bc82-65219f22f6a9",
+      "title": "product one",
+      "description": "desc",
+      "price": "10"
     }
   ]
 }

@@ -119,6 +119,7 @@ const ProductList = () => {
                   <Button
                     onClick={() => navigate(`/products/${product.id}/edit`)}
                     mt="2"
+                    bg="primary.51"
                   >
                     Edit
                   </Button>
@@ -126,6 +127,8 @@ const ProductList = () => {
                     disabled={selectedProductIds.length === 0}
                     onClick={handleDelete}
                     mt="5px"
+                    bg="primary.54"
+                    color="primary.59"
                   >
                     Delete
                   </Button>

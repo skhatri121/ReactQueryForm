@@ -1,59 +1,39 @@
-// Form.tsx
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CommonInput from "./CommonInput";
 import { SubmitHandler } from "react-hook-form";
+import React from "react";
 
 type FormValues = {
-  ProductTitle: string;
-  ProductDescription: string;
-  ProductPrice: string;
+  title: string;
+  description: string;
+  price: string;
 };
 
 interface FormProps {
   onSubmit: SubmitHandler<FormValues>;
+  initialValue: FormValues;
 }
 
-function Form({ onSubmit }: FormProps) {
-  const { handleSubmit, control } = useForm<FormValues>();
+function Form({ onSubmit, initialValue }: FormProps) {
+  const { handleSubmit, control, setValue } = useForm<FormValues>();
+
+  React.useEffect(() => {
+    if (initialValue) {
+      setValue("title", initialValue.title || "");
+      setValue("description", initialValue.description || "");
+      setValue("price", initialValue.price || "");
+    }
+  }, [initialValue, setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
+      <CommonInput control={control} name="title" placeholder="Product Title" />
+      <CommonInput
         control={control}
-        name="ProductTitle"
-        render={({ field: { onChange, value } }) => (
-          <CommonInput
-            onChange={onChange}
-            name="ProductTitle"
-            placeholder="Product Title"
-            value={value}
-          />
-        )}
+        name="description"
+        placeholder="Product Description"
       />
-      <Controller
-        control={control}
-        name="ProductDescription"
-        render={({ field: { onChange, value } }) => (
-          <CommonInput
-            onChange={onChange}
-            name="ProductDescription"
-            placeholder="Product Description"
-            value={value}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="ProductPrice"
-        render={({ field: { onChange, value } }) => (
-          <CommonInput
-            onChange={onChange}
-            name="ProductPrice"
-            placeholder="Product Price"
-            value={value}
-          />
-        )}
-      />
+      <CommonInput control={control} name="price" placeholder="Product Price" />
       <input type="submit" />
     </form>
   );

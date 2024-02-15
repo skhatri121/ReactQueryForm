@@ -113,7 +113,7 @@ const ProductList = () => {
                   cursor="pointer"
                   onClick={() => navigate(`/products/${product.id}`)}
                 >
-                  {product.price}
+                  $ {product.price}
                 </Td>
                 <Td>
                   <Button

@@ -27,15 +27,15 @@ const EditProduct = () => {
     },
   });
 
-  if (isLoading) return "Loading...";
-  if (isError) return `Error: ${error.message}`;
-
   const handleUpdateProduct = (updatedProduct) => {
     updateProductMutation.mutate({
       id,
       ...updatedProduct,
     });
   };
+
+  if (isLoading) return "Loading...";
+  if (isError) return `Error: ${error.message}`;
 
   return (
     <>

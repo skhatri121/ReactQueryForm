@@ -1,27 +1,35 @@
-// CommonInput.tsx
-
 import { Input, Box } from "@chakra-ui/react";
 import React from "react";
-
+import { Controller } from "react-hook-form";
 type CommonInputProps = {
-  onChange: (value: string) => void;
+  control: any;
   name: string;
   placeholder: string;
   errorMessage?: string;
 };
 
 const CommonInput: React.FC<CommonInputProps> = ({
-  onChange,
+  control,
+  name,
   placeholder,
   errorMessage,
 }) => (
   <>
-    <Input
-      onChange={(e) => onChange(e.target.value)}
-      type="text"
-      placeholder={placeholder}
+    <Controller
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <>
+          <Input
+            onChange={(e) => field.onChange(e.target.value)}
+            value={field.value}
+            type="text"
+            placeholder={placeholder}
+          />
+          {errorMessage && <Box color="red">{errorMessage}</Box>}
+        </>
+      )}
     />
-    {errorMessage && <Box color="red">{errorMessage}</Box>}
   </>
 );
 

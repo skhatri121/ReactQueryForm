@@ -1,4 +1,3 @@
-// AddProduct.tsx
 import { useMutation, useQueryClient } from "react-query";
 import Form from "./Form";
 import { createProduct } from "../api/fnc";

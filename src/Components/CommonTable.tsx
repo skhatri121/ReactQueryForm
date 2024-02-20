@@ -13,6 +13,15 @@ import {
 } from "@chakra-ui/react";
 
 const CommonTable = ({ products, columns, navigate, handleDelete }) => {
+  const columnHelper = () => {
+    if (!columns && products.length > 0) {
+      return Object.keys(products[0]);
+    } else {
+      return columns;
+    }
+  };
+
+  const tableColumns = columnHelper();
   return (
     <Stack spacing={10}>
       <Center>
@@ -20,7 +29,7 @@ const CommonTable = ({ products, columns, navigate, handleDelete }) => {
           <Table variant="simple">
             <Thead>
               <Tr>
-                {columns.map((column) => (
+                {tableColumns.map((column) => (
                   <Th key={column}>{column}</Th>
                 ))}
                 <Th>Actions</Th>

@@ -19,22 +19,10 @@
       "price": "200"
     },
     {
-      "id": "4f423676-2cb0-422a-8201-b787919c1cc9",
+      "id": "55477619-7f78-4436-bef2-c966360dc62d",
       "title": "Product Three",
       "description": "Desc Three",
-      "price": "300"
-    },
-    {
-      "id": "364631ad-eb45-4ff3-8fcf-eee6c80d1563",
-      "title": "Product Four",
-      "description": "Desc Four",
-      "price": "400"
-    },
-    {
-      "id": "a83c0055-76d0-48b5-a235-a7faf758afd8",
-      "title": "Product Five",
-      "description": "Desc Five",
-      "price": "550"
+      "price": "2011"
     }
   ]
 }

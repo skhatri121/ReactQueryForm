@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import CommonInput from "./CommonInput";
 import { SubmitHandler } from "react-hook-form";
 import React from "react";
+import CommonDatePicker from "./CommonDatePicker";
 
 type FormValues = {
   title: string;
@@ -34,6 +35,7 @@ function Form({ onSubmit, initialValue }: FormProps) {
         placeholder="Product Description"
       />
       <CommonInput control={control} name="price" placeholder="Product Price" />
+      <CommonDatePicker />
       <input type="submit" />
     </form>
   );

@@ -4,7 +4,8 @@ import { fetchProducts, deleteProduct } from "../api/fnc";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import AddProduct from "../Components/AddProduct";
-import CommonTable from "../Components/CommonTable";
+import TableTanstack from "../Components/TableTanstack";
+import { ButtonGroup, Button } from "@chakra-ui/react";
 
 const ProductList = () => {
   const queryClient = useQueryClient();
@@ -59,23 +60,49 @@ const ProductList = () => {
   };
 
   const offset = currentPage * productsPerPage;
+  const actionsColumn = {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: (props) => (
+      <ButtonGroup gap="4">
+        <Button
+          colorScheme="blue"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/products/${props.row.original.id}/edit`);
+          }}
+          mt="2"
+          size="md"
+        >
+          Edit
+        </Button>
+        <Button
+          colorScheme="blue"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete(props.row.original.id);
+          }}
+          mt="5px"
+          size="md"
+        >
+          Delete
+        </Button>
+      </ButtonGroup>
+    ),
+  };
 
-  const columns = ["Title", "Description", "Price"];
+  const columns = [
+    { accessorKey: "title", header: "Title" },
+    { accessorKey: "description", header: "Description" },
+    { accessorKey: "price", header: "Price" },
+    actionsColumn,
+  ];
 
   return (
     <>
       <AddProduct />
 
-      <CommonTable
-        products={products.slice(offset, offset + productsPerPage)}
-        columns={columns}
-        selectedProductIds={selectedProductIds}
-        handleCheckboxChange={handleCheckboxChange}
-        navigate={navigate}
-        handleDelete={handleDelete}
-      />
-
-      <ReactPaginate
+      {/* <ReactPaginate
         breakLabel={"..."}
         pageCount={pageCount}
         marginPagesDisplayed={2}
@@ -83,6 +110,14 @@ const ProductList = () => {
         onPageChange={changePage}
         containerClassName={"pagination"}
         activeClassName={"active"}
+      /> */}
+
+      <TableTanstack
+        products={products}
+        columns={columns}
+        navigate={navigate}
+        handleCheckboxChange={handleCheckboxChange}
+        selectedProductIds={selectedProductIds}
       />
     </>
   );

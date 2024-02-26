@@ -4,7 +4,7 @@
       "id": "718ca63e-879b-4a75-bc28-bf01ab87f86c",
       "title": "Product Two",
       "description": "Desc two",
-      "price": "99091"
+      "price": "1999"
     },
     {
       "id": "ccfa3cab-3bc9-4bf0-aec8-ad3932fba5fa",
@@ -23,6 +23,54 @@
       "title": "Product Four",
       "description": "Desc Four",
       "price": "2"
+    },
+    {
+      "id": "81664f67-be76-443f-9207-72945964ae56",
+      "title": "Product five ",
+      "description": "Fifth description",
+      "price": "701"
+    },
+    {
+      "id": "dfc3dfa1-45c8-4d9f-850d-77419759b739",
+      "title": "Product six",
+      "description": "Sixth desc",
+      "price": "784"
+    },
+    {
+      "id": "7ee9d759-c4cc-4f41-9a40-628584f3b0e8",
+      "title": "Product seven",
+      "description": "desc seven",
+      "price": "500"
+    },
+    {
+      "id": "a34d540c-38a5-41b8-8be4-526a2f075fa4",
+      "title": "Product eight",
+      "description": "desc eight",
+      "price": "879"
+    },
+    {
+      "id": "106d614f-b315-4c65-93c5-6f8dd8900090",
+      "title": "Product nine",
+      "description": "desc nine",
+      "price": "121"
+    },
+    {
+      "id": "47a0ecd0-de8a-4d1f-8646-beb412aa9e93",
+      "title": "Product ten",
+      "description": "desc ten",
+      "price": "696"
+    },
+    {
+      "id": "5b9c1a99-ab0b-4260-99d1-f5cfc570dbc0",
+      "title": "Product eleven",
+      "description": "desc eleven",
+      "price": "7014"
+    },
+    {
+      "id": "47b2fce0-abe8-409b-86ce-aea0d1ee91ee",
+      "title": "Product twelve ",
+      "description": "Twelve desc",
+      "price": "180"
     }
   ]
 }

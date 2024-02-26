@@ -2,31 +2,39 @@ import { Box } from "@chakra-ui/react";
 import {
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
+import Filters from "./Filters";
 
 const TableTanstack = (props) => {
   const [data, setData] = useState(props.products);
+
+  const [columnFilters, setColumnFilters] = useState([]);
 
   const columns = props.columns || [];
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnFilters,
+    },
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   useEffect(() => {
     setData(props.products);
   }, [props.products]);
 
-  if (!columns || columns.length === 0) {
-    return <div>No columns defined.</div>;
-  }
-
   return (
     <>
+      <Filters
+        columnFilters={columnFilters}
+        setColumnFilters={setColumnFilters}
+      />
       <Box bg="primary.50" color="primary.59">
         <Box>
           {table.getHeaderGroups().map((headerGroup) => (

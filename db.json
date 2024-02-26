@@ -4,7 +4,7 @@
       "id": "718ca63e-879b-4a75-bc28-bf01ab87f86c",
       "title": "Product Two",
       "description": "Desc two",
-      "price": "999"
+      "price": "99091"
     },
     {
       "id": "ccfa3cab-3bc9-4bf0-aec8-ad3932fba5fa",
@@ -23,12 +23,6 @@
       "title": "Product Four",
       "description": "Desc Four",
       "price": "2"
-    },
-    {
-      "id": "360ecf4a-ea79-4f5e-887d-84ad661c5ce1",
-      "title": "Product Five",
-      "description": "Desc Five",
-      "price": "41"
     }
   ]
 }

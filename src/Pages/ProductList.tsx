@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { fetchProducts, deleteProduct } from "../api/fnc";
 import { useNavigate } from "react-router-dom";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 import AddProduct from "../Components/AddProduct";
 import TableTanstack from "../Components/TableTanstack";
 import { ButtonGroup, Button } from "@chakra-ui/react";

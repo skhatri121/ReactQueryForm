@@ -2,7 +2,6 @@ import { Box, Button, ButtonGroup, Text } from "@chakra-ui/react";
 import {
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -21,45 +20,13 @@ const TableTanstack = (props) => {
       columnFilters,
     },
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  //update table when changes
   useEffect(() => {
     setData(props.products);
   }, [props.products]);
-
-  useEffect(() => {
-    // Apply filters to the data and set it back to 'data'
-    const filteredData = applyFilters(props.products, columnFilters);
-    setData(filteredData);
-  }, [columnFilters, props.products]);
-
-  // const applyFilters = (data, filters) => {
-  //   return data.filter((item) => {
-  //     return filters.every((filter) => {
-  //       return String(item[filter.accessorKey])
-  //         .toLowerCase()
-  //         .includes(filter.value.toLowerCase());
-  //     });
-  //   });
-  // };
-
-  const applyFilters = (data, filters) => {
-    return data.filter((products) => {
-      const matches = filters.map((filter) => {
-        const cellValue = String(products[filter.accessorKey]).toLowerCase();
-        const filterValue = filter.value.toLowerCase();
-        const match = cellValue.includes(filterValue);
-        console.log(
-          `Filtering: ${filter.accessorKey}, ${cellValue}, ${filterValue}, ${match}`
-        );
-        return match;
-      });
-      console.log("Row Matches:", matches);
-      return matches.every(Boolean);
-    });
-  };
 
   return (
     <>

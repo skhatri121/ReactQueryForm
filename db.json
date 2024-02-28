@@ -1,28 +1,16 @@
 {
   "products": [
     {
-      "id": "718ca63e-879b-4a75-bc28-bf01ab87f86c",
-      "title": "Product Two",
-      "description": "Desc two",
-      "price": "1999"
-    },
-    {
-      "id": "ccfa3cab-3bc9-4bf0-aec8-ad3932fba5fa",
-      "title": "Product One",
-      "description": "Desc One",
-      "price": "20"
-    },
-    {
       "id": "b9d402fa-57e2-4bee-aaa8-68f273858bd1",
       "title": "Product Three",
       "description": "Desc Three",
-      "price": "40"
+      "price": "4001"
     },
     {
       "id": "a529834c-38ea-434a-b53e-5695bbabd1d0",
       "title": "Product Four",
       "description": "Desc Four",
-      "price": "2"
+      "price": "200120"
     },
     {
       "id": "81664f67-be76-443f-9207-72945964ae56",
@@ -65,12 +53,6 @@
       "title": "Product eleven",
       "description": "desc eleven",
       "price": "7014"
-    },
-    {
-      "id": "47b2fce0-abe8-409b-86ce-aea0d1ee91ee",
-      "title": "Product twelve ",
-      "description": "Twelve desc",
-      "price": "180"
     }
   ]
 }
